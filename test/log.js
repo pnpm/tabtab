@@ -1,5 +1,5 @@
-const tabtab = require('..');
 const assert = require('assert');
+const tabtab = require('..');
 
 describe('tabtab.log', () => {
   it('tabtab.log throws an Error in case args is not an Array', () => {

@@ -1,4 +1,3 @@
-const tabtab = require('..');
 const assert = require('assert');
 const run = require('inquirer-test');
 const debug = require('debug')('tabtab:test:install');
@@ -6,6 +5,7 @@ const untildify = require('untildify');
 const path = require('path');
 const fs = require('fs');
 const { promisify } = require('es6-promisify');
+const tabtab = require('..');
 const { COMPLETION_DIR } = require('../lib/constants');
 const { rejects, setupSuiteForInstall } = require('./utils');
 

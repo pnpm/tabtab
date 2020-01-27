@@ -1,5 +1,5 @@
-const tabtab = require('..');
 const assert = require('assert');
+const tabtab = require('..');
 
 describe('tabtab.parseEnv()', () => {
   it('parseEnv with COMP stuff', () => {
