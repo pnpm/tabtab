@@ -1,7 +1,7 @@
 dependencies:
   debug: 4.1.1
+  enquirer: 2.3.4
   es6-promisify: 6.0.2
-  inquirer: 6.5.2
   minimist: 1.2.0
   mkdirp: 0.5.1
   untildify: 3.0.3
@@ -126,6 +126,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-w2rsy6VjuJzrVW82kPCx2eNUf38=
+  /ansi-colors/3.2.4:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-hHUXGagefjN2iRrID63xckIvotOXOojhQKWIPUZ4mNUZ9nLZW+7FMNoE1lOkEhNWYsx/7ysGIuJYCiMAA9FnrA==
   /ansi-escape-sequences/4.1.0:
     dependencies:
       array-back: 3.1.0
@@ -135,6 +141,7 @@ packages:
     resolution:
       integrity: sha512-dzW9kHxH011uBsidTXd14JXgzye/YLb2LzeKZ4bsgl/Knwx8AtbSFkkGxagdNOoh0DlqHCmfiEjWKBaqjOanVw==
   /ansi-escapes/3.2.0:
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -154,11 +161,13 @@ packages:
     resolution:
       integrity: sha1-w7M6te42DYbg5ijwRorn7yfWVN8=
   /ansi-regex/3.0.0:
+    dev: true
     engines:
       node: '>=4'
     resolution:
       integrity: sha1-7QMXwyIGT3lGbAKWa922Bas32Zg=
   /ansi-regex/4.1.0:
+    dev: true
     engines:
       node: '>=6'
     resolution:
@@ -172,6 +181,7 @@ packages:
   /ansi-styles/3.2.1:
     dependencies:
       color-convert: 1.9.3
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -581,6 +591,7 @@ packages:
       ansi-styles: 3.2.1
       escape-string-regexp: 1.0.5
       supports-color: 5.5.0
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -602,6 +613,7 @@ packages:
     resolution:
       integrity: sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg==
   /chardet/0.7.0:
+    dev: true
     resolution:
       integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
   /chokidar/1.7.0:
@@ -661,6 +673,7 @@ packages:
   /cli-cursor/2.1.0:
     dependencies:
       restore-cursor: 2.0.0
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -674,6 +687,7 @@ packages:
     resolution:
       integrity: sha512-I/zHAwsKf9FqGoXM4WWRACob9+SNukZTd94DWF57E4toouRulbCxcUh6RKUEOQlYTHJnzkPMySvPNaaSLNfLZw==
   /cli-width/2.2.0:
+    dev: true
     resolution:
       integrity: sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
   /clipboardy/1.2.3:
@@ -724,9 +738,11 @@ packages:
   /color-convert/1.9.3:
     dependencies:
       color-name: 1.1.3
+    dev: true
     resolution:
       integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==
   /color-name/1.1.3:
+    dev: true
     resolution:
       integrity: sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=
   /combined-stream/1.0.8:
@@ -1116,6 +1132,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
+  /enquirer/2.3.4:
+    dependencies:
+      ansi-colors: 3.2.4
+    dev: false
+    engines:
+      node: '>=8.6'
+    resolution:
+      integrity: sha512-pkYrrDZumL2VS6VBGDhqbajCM2xpkUNLuKfGPjfKaSIBKYopQbqEFyrOkRMIb2HDR/rO1kGhEt/5twBwtzKBXw==
   /error-ex/1.3.2:
     dependencies:
       is-arrayish: 0.2.1
@@ -1155,6 +1179,7 @@ packages:
     resolution:
       integrity: sha512-eO6vFm0JvqGzjWIQA6QVKjxpmELfhWbDUWHm1rPfIbn55mhKPiAa5xpLmQWJrNa629ZIeQ8ZvMAi13kvrjK6Mg==
   /escape-string-regexp/1.0.5:
+    dev: true
     engines:
       node: '>=0.8.0'
     resolution:
@@ -1564,6 +1589,7 @@ packages:
       chardet: 0.7.0
       iconv-lite: 0.4.24
       tmp: 0.0.33
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -1632,6 +1658,7 @@ packages:
   /figures/2.0.0:
     dependencies:
       escape-string-regexp: 1.0.5
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -1997,6 +2024,7 @@ packages:
     resolution:
       integrity: sha1-6CB68cx7MNRGzHC3NLXovhj4jVE=
   /has-flag/3.0.0:
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -2077,6 +2105,7 @@ packages:
   /iconv-lite/0.4.24:
     dependencies:
       safer-buffer: 2.1.2
+    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
@@ -2154,6 +2183,7 @@ packages:
       string-width: 2.1.1
       strip-ansi: 5.2.0
       through: 2.3.8
+    dev: true
     engines:
       node: '>=6.0.0'
     resolution:
@@ -2339,6 +2369,7 @@ packages:
     resolution:
       integrity: sha1-754xOG8DGn8NZDr4L95QxFfvAMs=
   /is-fullwidth-code-point/2.0.0:
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -2463,6 +2494,7 @@ packages:
     resolution:
       integrity: sha1-IHurkWOEmcB7Kt8kCkGochADRXU=
   /is-promise/2.1.0:
+    dev: true
     resolution:
       integrity: sha1-eaKp7OfwlugPNtKy87wWwf9L8/o=
   /is-redirect/1.0.0:
@@ -2832,6 +2864,7 @@ packages:
     resolution:
       integrity: sha1-2ZwHpmnp5tJOE2Lf4mbGdhavEwI=
   /lodash/4.17.15:
+    dev: true
     resolution:
       integrity: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
   /log-driver/1.2.7:
@@ -3008,6 +3041,7 @@ packages:
     resolution:
       integrity: sha512-01paPWYgLrkqAyrlDorC1uDwl2p3qZT7yl806vW7DvDoxwXi46jsjFbg+WdwotBIk6/MbEhO/dh5aZ5sNj/dWQ==
   /mimic-fn/1.2.0:
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -3076,6 +3110,7 @@ packages:
     resolution:
       integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
   /mute-stream/0.0.7:
+    dev: true
     resolution:
       integrity: sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
   /mute-stream/0.0.8:
@@ -3330,6 +3365,7 @@ packages:
   /onetime/2.0.1:
     dependencies:
       mimic-fn: 1.2.0
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -3369,6 +3405,7 @@ packages:
     resolution:
       integrity: sha1-/7xJiDNuDoM94MFox+8VISGqf7M=
   /os-tmpdir/1.0.2:
+    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
@@ -3980,6 +4017,7 @@ packages:
     dependencies:
       onetime: 2.0.1
       signal-exit: 3.0.2
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -4016,6 +4054,7 @@ packages:
   /run-async/2.3.0:
     dependencies:
       is-promise: 2.1.0
+    dev: true
     engines:
       node: '>=0.12.0'
     resolution:
@@ -4023,6 +4062,7 @@ packages:
   /rxjs/6.5.4:
     dependencies:
       tslib: 1.10.0
+    dev: true
     engines:
       npm: '>=2.0.0'
     resolution:
@@ -4042,6 +4082,7 @@ packages:
     resolution:
       integrity: sha1-QKNmnzsHfR6UPURinhV91IAjvy4=
   /safer-buffer/2.1.2:
+    dev: true
     resolution:
       integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
   /semver-diff/2.1.0:
@@ -4124,6 +4165,7 @@ packages:
     resolution:
       integrity: sha1-5PcCpQxRiw9v6YRRiQ1wWvKba3A=
   /signal-exit/3.0.2:
+    dev: true
     resolution:
       integrity: sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
   /slice-ansi/2.1.0:
@@ -4297,6 +4339,7 @@ packages:
     dependencies:
       is-fullwidth-code-point: 2.0.0
       strip-ansi: 4.0.0
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -4365,6 +4408,7 @@ packages:
   /strip-ansi/4.0.0:
     dependencies:
       ansi-regex: 3.0.0
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -4372,6 +4416,7 @@ packages:
   /strip-ansi/5.2.0:
     dependencies:
       ansi-regex: 4.1.0
+    dev: true
     engines:
       node: '>=6'
     resolution:
@@ -4427,6 +4472,7 @@ packages:
   /supports-color/5.5.0:
     dependencies:
       has-flag: 3.0.0
+    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -4521,6 +4567,7 @@ packages:
     resolution:
       integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
   /through/2.3.8:
+    dev: true
     resolution:
       integrity: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
   /through2/2.0.5:
@@ -4539,6 +4586,7 @@ packages:
   /tmp/0.0.33:
     dependencies:
       os-tmpdir: 1.0.2
+    dev: true
     engines:
       node: '>=0.6.0'
     resolution:
@@ -4608,6 +4656,7 @@ packages:
     resolution:
       integrity: sha512-rvuRbTarPXmMb79SmzEp8aqXNKcK+y0XaB298IXueQ8I2PsrATcPBCSPyK/dDNa2iWOhKlfNnOjdAOTBU/nkFA==
   /tslib/1.10.0:
+    dev: true
     resolution:
       integrity: sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
   /tunnel-agent/0.6.0:
@@ -5084,10 +5133,10 @@ specifiers:
   c8: ^3.2.0
   coveralls: ^3.0.2
   debug: ^4.0.1
+  enquirer: ^2.3.4
   es6-promisify: ^6.0.0
   eslint: ^6.8.0
   eslint-config-mklabs: ^1.0.9
-  inquirer: ^6.0.0
   inquirer-test: ^2.0.1
   jsdoc-to-markdown: ^4.0.1
   minimist: ^1.2.0

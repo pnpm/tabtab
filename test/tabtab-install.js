@@ -41,7 +41,7 @@ describe('tabtab.install()', () => {
     );
   });
 
-  describe('tabtab.install() on ~/.bashrc', () => {
+  describe.skip('tabtab.install() on ~/.bashrc', () => {
     setupSuiteForInstall();
 
     it('asks about shell (bash) with custom location', () => {

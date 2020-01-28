@@ -51,8 +51,8 @@
   },
   "dependencies": {
     "debug": "^4.0.1",
+    "enquirer": "^2.3.4",
     "es6-promisify": "^6.0.0",
-    "inquirer": "^6.0.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "untildify": "^3.0.3"
