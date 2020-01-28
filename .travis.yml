@@ -6,15 +6,14 @@ node_js:
   - 8
   - 7
 
-cache:
-  directories:
-    - node_modules
-
 notifications:
   email: false
 
 before_install:
-  - npm install -g npm@latest
+  - curl -L https://unpkg.com/@pnpm/self-installer | node
+
+install:
+  - pnpm install
 
 after_success:
-  - npm run coverage
+  - pnpm run coverage
