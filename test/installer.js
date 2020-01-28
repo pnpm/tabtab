@@ -43,6 +43,11 @@ describe('installer', () => {
       /Unable to uninstall if options.name is missing/,
       'Uninstall should throw the expected message when name is missing'
     );
+    await assert.rejects(
+      async () => uninstall({ name: 'foo' }),
+      /Unable to uninstall if options.shell is missing/,
+      'Uninstall should throw the expected message when shell is missing'
+    );
   });
 
   it('has writeToShellConfig / writeToCompletionScript functions', () => {
@@ -56,7 +61,9 @@ describe('installer', () => {
     before(async () => {
       // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
       await writeFile(
-        untildify(path.join(COMPLETION_DIR, 'bash', `${TABTAB_SCRIPT_NAME}.bash`)),
+        untildify(
+          path.join(COMPLETION_DIR, 'bash', `${TABTAB_SCRIPT_NAME}.bash`)
+        ),
         ''
       );
     });
@@ -65,7 +72,7 @@ describe('installer', () => {
       install({
         name: 'foo',
         completer: 'foo-complete',
-        location: '~/.bashrc', 
+        location: '~/.bashrc',
         shell: 'bash'
       })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
@@ -73,7 +80,9 @@ describe('installer', () => {
           assert.ok(/tabtab source for packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
-            filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash')}`)
+            filecontent.match(
+              `. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash')}`
+            )
           );
         })
         .then(() =>
@@ -113,7 +122,9 @@ describe('installer', () => {
         .then(filecontent => {
           assert.ok(!/tabtab source for foo/.test(filecontent));
           assert.ok(
-            !filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/foo.bash')}`)
+            !filecontent.match(
+              `. ${path.join(COMPLETION_DIR, 'bash/foo.bash')}`
+            )
           );
         }));
   });

@@ -80,7 +80,9 @@ describe('tabtab.install()', () => {
           assert.ok(/tabtab source for packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
-            filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash')}`)
+            filecontent.match(
+              `. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash')}`
+            )
           );
         });
     });
