@@ -90,7 +90,7 @@ const rejects = async (promise, error, message = '') => {
       const ok = error.test(err.message);
       if (!ok) {
         toThrow = new Error(
-          `AssertionError: ${error} is not validated
+          `AssertionError: ${error} is not validated. Got ${err.message}
           ${message}`
         );
       }

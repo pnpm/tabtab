@@ -1,5 +1,6 @@
 const assert = require('assert');
 const fs = require('fs');
+const mkdirp = require('mkdirp');
 const path = require('path');
 const untildify = require('untildify');
 const { promisify } = require('es6-promisify');
@@ -43,6 +44,11 @@ describe('installer', () => {
       /Unable to uninstall if options.name is missing/,
       'Uninstall should throw the expected message when name is missing'
     );
+    await assert.rejects(
+      async () => uninstall({ name: 'foo' }),
+      /Unable to uninstall if options.shell is missing/,
+      'Uninstall should throw the expected message when shell is missing'
+    );
   });
 
   it('has writeToShellConfig / writeToCompletionScript functions', () => {
@@ -54,43 +60,46 @@ describe('installer', () => {
     setupSuiteForInstall(true);
 
     before(async () => {
+      const bashDir = untildify(path.join(COMPLETION_DIR, 'bash'));
+      await mkdirp(bashDir);
       // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
-      await writeFile(
-        untildify(path.join(COMPLETION_DIR, `${TABTAB_SCRIPT_NAME}.bash`)),
-        ''
-      );
+      await writeFile(path.join(bashDir, `${TABTAB_SCRIPT_NAME}.bash`), '');
     });
 
     it('installs the necessary line into ~/.bashrc', () =>
       install({
         name: 'foo',
         completer: 'foo-complete',
-        location: '~/.bashrc'
+        location: '~/.bashrc',
+        shell: 'bash'
       })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
           assert.ok(/tabtab source for packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
-            filecontent.match(`. ${path.join(COMPLETION_DIR, '__tabtab.bash')}`)
+            filecontent.match(
+              `. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash')}`
+            )
           );
         })
         .then(() =>
           readFile(
-            untildify(path.join(COMPLETION_DIR, '__tabtab.bash')),
+            untildify(path.join(COMPLETION_DIR, 'bash/__tabtab.bash')),
             'utf8'
           )
         )
         .then(filecontent => {
           assert.ok(/tabtab source for foo/.test(filecontent));
           assert.ok(
-            filecontent.match(`. ${path.join(COMPLETION_DIR, 'foo.bash')}`)
+            filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/foo.bash')}`)
           );
         }));
 
     it('uninstalls the necessary line from ~/.bashrc and completion scripts', () =>
       uninstall({
-        name: 'foo'
+        name: 'foo',
+        shell: 'bash'
       })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
@@ -98,20 +107,22 @@ describe('installer', () => {
           assert.ok(!/uninstall by removing these lines/.test(filecontent));
           assert.ok(
             !filecontent.match(
-              `. ${path.join(COMPLETION_DIR, '__tabtab.bash')}`
+              `. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash')}`
             )
           );
         })
         .then(() =>
           readFile(
-            untildify(path.join(COMPLETION_DIR, '__tabtab.bash')),
+            untildify(path.join(COMPLETION_DIR, 'bash/__tabtab.bash')),
             'utf8'
           )
         )
         .then(filecontent => {
           assert.ok(!/tabtab source for foo/.test(filecontent));
           assert.ok(
-            !filecontent.match(`. ${path.join(COMPLETION_DIR, 'foo.bash')}`)
+            !filecontent.match(
+              `. ${path.join(COMPLETION_DIR, 'bash/foo.bash')}`
+            )
           );
         }));
   });
