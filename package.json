@@ -30,7 +30,7 @@
     "eslint-config-mklabs": "^1.0.9",
     "inquirer-test": "^2.0.1",
     "jsdoc-to-markdown": "^4.0.1",
-    "mocha": "^5.2.0",
+    "mocha": "^7.0.1",
     "npm-watch": "^0.4.0",
     "remark-cli": "^5.0.0",
     "remark-toc": "^5.0.0",
