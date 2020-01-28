@@ -196,7 +196,7 @@ Top level install method. Does three things:
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | <code>Object</code> | Options object with    - name: The program name to complete    - completer: The actual program or binary that will act as the completer    for `name` program. Can be the same.    - location: The SHELL script config location (~/.bashrc, ~/.zshrc or    ~/.config/fish/config.fish) |
+| options | <code>Object</code> | Options object with    - name: The program name to complete    - completer: The actual program or binary that will act as the completer    for `name` program. Can be the same.    - location: The SHELL script config location (~/.bashrc, ~/.zshrc or    ~/.config/fish/config.fish)    - shell: the target shell language |
 
 <a name="removeLinesFromFilename"></a>
 
@@ -224,5 +224,5 @@ the system.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | <code>Object</code> | Options object with    - name: The package name to look for |
+| options | <code>Object</code> | Options object with    - name: The package name to look for    - shell: the target shell language |
 
