@@ -1,5 +1,6 @@
 const assert = require('assert');
 const fs = require('fs');
+const mkdirp = require('mkdirp');
 const path = require('path');
 const untildify = require('untildify');
 const { promisify } = require('es6-promisify');
@@ -59,13 +60,10 @@ describe('installer', () => {
     setupSuiteForInstall(true);
 
     before(async () => {
+      const bashDir = untildify(path.join(COMPLETION_DIR, 'bash'));
+      await mkdirp(bashDir);
       // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
-      await writeFile(
-        untildify(
-          path.join(COMPLETION_DIR, 'bash', `${TABTAB_SCRIPT_NAME}.bash`)
-        ),
-        ''
-      );
+      await writeFile(path.join(bashDir, `${TABTAB_SCRIPT_NAME}.bash`), '');
     });
 
     it('installs the necessary line into ~/.bashrc', () =>
