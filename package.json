@@ -1,6 +1,6 @@
 {
   "author": "mklabs",
-  "name": "tabtab",
+  "name": "@pnpm/tabtab",
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "main": "lib/index.js",
   "engines": {
@@ -47,7 +47,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mklabs/tabtab.git"
+    "url": "https://github.com/pnpm/tabtab.git"
   },
   "dependencies": {
     "debug": "^4.1.1",
@@ -62,5 +62,5 @@
     "commitLimit": false,
     "ignoreCommitPattern": "changelog|readme|^test"
   },
-  "version": "3.0.2"
+  "version": "0.0.0"
 }
