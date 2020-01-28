@@ -56,7 +56,7 @@ describe('installer', () => {
     before(async () => {
       // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
       await writeFile(
-        untildify(path.join(COMPLETION_DIR, `${TABTAB_SCRIPT_NAME}.bash`)),
+        untildify(path.join(COMPLETION_DIR, 'bash', `${TABTAB_SCRIPT_NAME}.bash`)),
         ''
       );
     });
@@ -65,32 +65,34 @@ describe('installer', () => {
       install({
         name: 'foo',
         completer: 'foo-complete',
-        location: '~/.bashrc'
+        location: '~/.bashrc', 
+        shell: 'bash'
       })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
           assert.ok(/tabtab source for packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
-            filecontent.match(`. ${path.join(COMPLETION_DIR, '__tabtab.bash')}`)
+            filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash')}`)
           );
         })
         .then(() =>
           readFile(
-            untildify(path.join(COMPLETION_DIR, '__tabtab.bash')),
+            untildify(path.join(COMPLETION_DIR, 'bash/__tabtab.bash')),
             'utf8'
           )
         )
         .then(filecontent => {
           assert.ok(/tabtab source for foo/.test(filecontent));
           assert.ok(
-            filecontent.match(`. ${path.join(COMPLETION_DIR, 'foo.bash')}`)
+            filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/foo.bash')}`)
           );
         }));
 
     it('uninstalls the necessary line from ~/.bashrc and completion scripts', () =>
       uninstall({
-        name: 'foo'
+        name: 'foo',
+        shell: 'bash'
       })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
@@ -98,20 +100,20 @@ describe('installer', () => {
           assert.ok(!/uninstall by removing these lines/.test(filecontent));
           assert.ok(
             !filecontent.match(
-              `. ${path.join(COMPLETION_DIR, '__tabtab.bash')}`
+              `. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash')}`
             )
           );
         })
         .then(() =>
           readFile(
-            untildify(path.join(COMPLETION_DIR, '__tabtab.bash')),
+            untildify(path.join(COMPLETION_DIR, 'bash/__tabtab.bash')),
             'utf8'
           )
         )
         .then(filecontent => {
           assert.ok(!/tabtab source for foo/.test(filecontent));
           assert.ok(
-            !filecontent.match(`. ${path.join(COMPLETION_DIR, 'foo.bash')}`)
+            !filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/foo.bash')}`)
           );
         }));
   });
