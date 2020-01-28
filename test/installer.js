@@ -3,7 +3,7 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const path = require('path');
 const untildify = require('untildify');
-const { promisify } = require('es6-promisify');
+const { promisify } = require('util');
 const {
   install,
   uninstall,

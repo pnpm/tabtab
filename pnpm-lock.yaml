@@ -1,10 +1,9 @@
 dependencies:
   debug: 4.1.1
   enquirer: 2.3.4
-  es6-promisify: 6.0.2
   minimist: 1.2.0
-  mkdirp: 0.5.1
-  untildify: 3.0.3
+  mkdirp: 1.0.3
+  untildify: 4.0.0
 devDependencies:
   auto-changelog: 1.16.2
   c8: 3.5.0
@@ -1174,10 +1173,6 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
-  /es6-promisify/6.0.2:
-    dev: false
-    resolution:
-      integrity: sha512-eO6vFm0JvqGzjWIQA6QVKjxpmELfhWbDUWHm1rPfIbn55mhKPiAa5xpLmQWJrNa629ZIeQ8ZvMAi13kvrjK6Mg==
   /escape-string-regexp/1.0.5:
     dev: true
     engines:
@@ -3059,6 +3054,7 @@ packages:
     resolution:
       integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
   /minimist/0.0.8:
+    dev: true
     resolution:
       integrity: sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
   /minimist/1.2.0:
@@ -3076,9 +3072,17 @@ packages:
   /mkdirp/0.5.1:
     dependencies:
       minimist: 0.0.8
+    dev: true
     hasBin: true
     resolution:
       integrity: sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
+  /mkdirp/1.0.3:
+    dev: false
+    engines:
+      node: '>=10'
+    hasBin: true
+    resolution:
+      integrity: sha512-6uCP4Qc0sWsgMLy1EOqqS/3rjDHOEnsStVr/4vtAIK2Y5i2kA7lFFejYrpIyiN9w0pYf4ckeCYT9f1r1P9KX5g==
   /mkdirp2/1.0.4:
     dev: true
     resolution:
@@ -4845,12 +4849,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-F+soB5h/dpUunASF/DEdBqgmouA=
-  /untildify/3.0.3:
+  /untildify/4.0.0:
     dev: false
     engines:
-      node: '>=4'
+      node: '>=8'
     resolution:
-      integrity: sha512-iSk/J8efr8uPT/Z4eSUywnqyrQU7DSdMfdqK4iWEaUVVmcP5JcnpRqmVMwcwcnmI1ATFNgC5V90u09tBynNFKA==
+      integrity: sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==
   /unzip-response/2.0.1:
     dev: true
     engines:
@@ -5132,18 +5136,17 @@ specifiers:
   auto-changelog: ^1.8.0
   c8: ^3.2.0
   coveralls: ^3.0.2
-  debug: ^4.0.1
+  debug: ^4.1.1
   enquirer: ^2.3.4
-  es6-promisify: ^6.0.0
   eslint: ^6.8.0
   eslint-config-mklabs: ^1.0.9
   inquirer-test: ^2.0.1
   jsdoc-to-markdown: ^4.0.1
   minimist: ^1.2.0
-  mkdirp: ^0.5.1
+  mkdirp: ^1.0.3
   mocha: ^5.2.0
   npm-watch: ^0.4.0
   remark-cli: ^5.0.0
   remark-toc: ^5.0.0
   serve: ^10.0.2
-  untildify: ^3.0.3
+  untildify: ^4.0.0

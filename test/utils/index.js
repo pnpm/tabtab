@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const untildify = require('untildify');
-const { promisify } = require('es6-promisify');
+const { promisify } = require('util');
 const { COMPLETION_DIR, TABTAB_SCRIPT_NAME } = require('../../lib/constants');
 
 const { exists } = require('../../lib/utils');
