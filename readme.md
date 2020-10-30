@@ -64,7 +64,9 @@ The goal of this rewrite is two-folded:
 
 ## Installation
 
-    npm install @pnpm/tabtab
+```
+pnpm add @pnpm/tabtab
+```
 
 ## Usage
 
