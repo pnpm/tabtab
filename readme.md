@@ -64,7 +64,9 @@ The goal of this rewrite is two-folded:
 
 ## Installation
 
-    npm install tabtab
+```
+pnpm add @pnpm/tabtab
+```
 
 ## Usage
 
@@ -77,7 +79,7 @@ Here is a basic example using
 ```js
 #! /usr/bin/env node
 
-const tabtab = require('tabtab');
+const tabtab = require('@pnpm/tabtab');
 const opts = require('minimist')(process.argv.slice(2), {
   string: ['foo', 'bar'],
   boolean: ['help', 'version', 'loglevel']
