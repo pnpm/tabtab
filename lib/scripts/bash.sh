@@ -16,6 +16,11 @@ if type complete &>/dev/null; then
                            {completer} completion -- "${words[@]}" \
                            2>/dev/null)) || return $?
     IFS="$si"
+
+    if [ "$COMPREPLY" = "__tabtab_complete_files__" ]; then
+      COMPREPLY=($(compgen -f -- "$cword"))
+    fi
+
     if type __ltrim_colon_completions &>/dev/null; then
       __ltrim_colon_completions "${words[cword]}"
     fi
