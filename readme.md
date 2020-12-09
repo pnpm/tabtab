@@ -230,6 +230,22 @@ items with `:` in them.
 Note that you can call `tabtab.log()` multiple times if you prefer to do so, it
 simply logs to the console in sequence.
 
+#### Filesystem completion
+
+If you have a parameter that expects a path to some file, you could want to let
+the shell use its native autocompletion. This saves you the work of writing
+custom filesystem autocomplete logic. Plus, the native autocomplete has a better
+handling of things like dircolors or hidden files.
+
+To trigger the filesystem completion, use `tabtab.logFiles()` without any
+argument.
+
+```js
+if (previousFlag === '--file') {
+  tabtab.logFiles();
+}
+```
+
 ### 3. Parsing env
 
 If you ever want to add more intelligent completion, you'll need to check and
