@@ -121,4 +121,23 @@ describe('tabtab.log', () => {
     ]);
     process.env.SHELL = shell;
   });
+
+  it('tabtab.log should escape ":" when name is given as an object without description', () => {
+    const shell = process.env.SHELL;
+    process.env.SHELL = '/usr/bin/zsh';
+    const logs = logTestHelper([
+      'foo:bar',
+      { name: 'foo:bar' },
+      { name: 'foo:bar', description: 'A command' },
+      { name: 'foo:bar', description: 'The foo:bar command' }
+    ]);
+
+    assert.deepStrictEqual(logs, [
+      'foo:bar',
+      'foo\\:bar',
+      'foo\\:bar:A command',
+      'foo\\:bar:The foo\\:bar command'
+    ]);
+    process.env.SHELL = shell;
+  });
 });
