@@ -7,7 +7,10 @@ function _{pkgname}_completion
   set completions (eval env DEBUG=\"" \"" COMP_CWORD=\""$words\"" COMP_LINE=\""$cmd \"" COMP_POINT=\""$cursor\"" {completer} completion -- $cmd)
 
   if [ "$completions" = "__tabtab_complete_files__" ]
-    __fish_complete_path (commandline -ct)
+    set -l matches (commandline -ct)*
+    if [ -n "$matches" ]
+      __fish_complete_path (commandline -ct)
+    end
   else
     for completion in $completions
       echo -e $completion
