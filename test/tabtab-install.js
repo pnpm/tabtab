@@ -1,15 +1,17 @@
 const assert = require('assert');
 const run = require('inquirer-test');
+const mkdirp = require('mkdirp');
 const debug = require('debug')('tabtab:test:install');
 const untildify = require('untildify');
 const path = require('path');
 const fs = require('fs');
 const { promisify } = require('util');
 const tabtab = require('..');
-const { COMPLETION_DIR } = require('../lib/constants');
+const { COMPLETION_DIR, TABTAB_SCRIPT_NAME } = require('../lib/constants');
 const { rejects, setupSuiteForInstall } = require('./utils');
 
 const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
 
 // For node 7 / 8
 assert.rejects = rejects;
@@ -38,6 +40,32 @@ describe('tabtab.install()', () => {
     await assert.rejects(
       async () => tabtab.install({ name: 'foo' }),
       /options\.completer is required/
+    );
+  });
+
+  it('rejects on unknown shell target', async () => {
+    await assert.rejects(
+      async () =>
+        tabtab.install({ name: 'foo', completer: 'foo', shell: 'unknown' }),
+      /Couldn't find shell location for unknown/
+    );
+  });
+
+  it('installs to the passed in shell', async () => {
+    const bashDir = untildify(path.join(COMPLETION_DIR, 'bash'));
+    await mkdirp(bashDir);
+    // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
+    await writeFile(path.join(bashDir, `${TABTAB_SCRIPT_NAME}.bash`), '');
+
+    await tabtab.install({ name: 'foo', completer: 'foo', shell: 'bash' });
+
+    const filecontent = await readFile(
+      untildify(path.join(COMPLETION_DIR, 'bash/__tabtab.bash')),
+      'utf8'
+    );
+    assert.ok(/tabtab source for foo/.test(filecontent));
+    assert.ok(
+      filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/foo.bash')}`)
     );
   });
 

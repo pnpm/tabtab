@@ -188,6 +188,7 @@ The method returns a promise, so `await / async` usage is possible. It takes an
 
 -   `name`: The program to complete
 -   `completer`: The program that does the completion (can be the same program).
+-   `shell`: Optional. The shell for which the autocompletion script needs to be generated. If not provided, a prompt will ask about which shell should be used.
 
 `tabtab.install()` will ask the user which SHELL to use, and optionally a path
 to write to. This will add a new line to either `~/.bashrc`, `~/.zshrc` or
