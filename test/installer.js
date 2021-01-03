@@ -1,6 +1,5 @@
 const assert = require('assert');
 const fs = require('fs');
-const mkdirp = require('mkdirp');
 const path = require('path');
 const untildify = require('untildify');
 const { promisify } = require('util');
@@ -18,6 +17,7 @@ assert.rejects = rejects;
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
+const mkdir = promisify(fs.mkdir);
 
 describe('installer', () => {
   it('has install / uninstall functions', () => {
@@ -61,7 +61,7 @@ describe('installer', () => {
 
     before(async () => {
       const bashDir = untildify(path.join(COMPLETION_DIR, 'bash'));
-      await mkdirp(bashDir);
+      await mkdir(bashDir, { recursive: true });
       // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
       await writeFile(path.join(bashDir, `${TABTAB_SCRIPT_NAME}.bash`), '');
     });

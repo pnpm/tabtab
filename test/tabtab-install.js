@@ -1,6 +1,5 @@
 const assert = require('assert');
 const run = require('inquirer-test');
-const mkdirp = require('mkdirp');
 const debug = require('debug')('tabtab:test:install');
 const untildify = require('untildify');
 const path = require('path');
@@ -12,6 +11,7 @@ const { rejects, setupSuiteForInstall } = require('./utils');
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
+const mkdir = promisify(fs.mkdir);
 
 // For node 7 / 8
 assert.rejects = rejects;
@@ -53,7 +53,7 @@ describe('tabtab.install()', () => {
 
   it('installs to the passed in shell', async () => {
     const bashDir = untildify(path.join(COMPLETION_DIR, 'bash'));
-    await mkdirp(bashDir);
+    await mkdir(bashDir, { recursive: true });
     // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
     await writeFile(path.join(bashDir, `${TABTAB_SCRIPT_NAME}.bash`), '');
 

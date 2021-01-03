@@ -7,7 +7,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "test": "mkdirp ~/.config/tabtab && DEBUG='tabtab*' c8 mocha --timeout 5000",
+    "test": "mkdir -p ~/.config/tabtab && DEBUG='tabtab*' c8 mocha --timeout 5000",
     "posttest": "npm run eslint",
     "mocha": "DEBUG='tabtab*' mocha --timeout 5000",
     "coverage": "c8 report --reporter=text-lcov | coveralls",
@@ -53,7 +53,6 @@
     "debug": "^4.3.1",
     "enquirer": "^2.3.6",
     "minimist": "^1.2.5",
-    "mkdirp": "^1.0.4",
     "untildify": "^4.0.0"
   },
   "auto-changelog": {
