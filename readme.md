@@ -15,8 +15,6 @@ node's land.
 
 -   Windows is not supported
 -   Cache has been removed
--   Now only support node `> 7.10.1`, for previous version with support for node
-    6 be sure to use tabtab `2.2.x`
 
 ## Table of Contents
 
