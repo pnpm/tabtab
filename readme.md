@@ -1,6 +1,6 @@
 # @pnpm/tabtab
 
-[![Build Status](https://travis-ci.com/pnpm/tabtab.svg?branch=master)](https://travis-ci.com/pnpm/tabtab)
+![CI](https://github.com/pnpm/tabtab/workflows/CI/badge.svg)
 
 A node package to do some custom command line `<tab><tab>` completion for any
 system command, for Bash, Zsh, and Fish shells.
