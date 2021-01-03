@@ -32,4 +32,4 @@ jobs:
     - name: pnpm install
       run: pnpm install
     - name: run tests
-      run: pnpm test
+      run: SHELL=/bin/bash pnpm test
