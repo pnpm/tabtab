@@ -1,10 +1,14 @@
 ###-begin-{pkgname}-completion-###
 function _{pkgname}_completion
-  set cmd (commandline -o)
-  set cursor (commandline -C)
-  set words (count $cmd)
+  set -l cmd (commandline -o)
+  set -l cursor (commandline -C)
+  set -l words (count $cmd)
+  set -lx DEBUG " "
+  set -lx COMP_CWORD $words
+  set -lx COMP_LINE $cmd
+  set -lx COMP_POINT $cursor
 
-  set completions (eval env DEBUG=\"" \"" COMP_CWORD=\""$words\"" COMP_LINE=\""$cmd \"" COMP_POINT=\""$cursor\"" {completer} completion -- $cmd)
+  set -l completions ({completer} completion -- $cmd)
 
   if [ "$completions" = "__tabtab_complete_files__" ]
     set -l matches (commandline -ct)*
