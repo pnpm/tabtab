@@ -1,7 +1,7 @@
 const assert = require('assert');
 const path = require('path');
 const fs = require('fs');
-const { getCompletionScript } = require('../lib/installer');
+const { getCompletionScript } = require('..');
 
 describe('getCompletionScript gets the right completion script for', () => {
   for (const shell of ['bash', 'fish', 'zsh']) {
