@@ -4,7 +4,7 @@
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "main": "lib/index.js",
   "engines": {
-    "node": ">=10"
+    "node": ">=18"
   },
   "scripts": {
     "test": "mkdir -p ~/.config/tabtab && DEBUG='tabtab*' c8 mocha --timeout 5000",
