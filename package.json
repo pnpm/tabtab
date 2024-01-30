@@ -61,5 +61,5 @@
     "commitLimit": false,
     "ignoreCommitPattern": "changelog|readme|^test"
   },
-  "version": "0.1.2"
+  "version": "0.2.0"
 }
