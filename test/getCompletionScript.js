@@ -18,4 +18,17 @@ describe('getCompletionScript gets the right completion script for', () => {
       assert.equal(received, expected);
     });
   }
+
+  it('pwsh', async () => {
+    const received = await getCompletionScript({
+      name: 'foo',
+      completer: 'foo-complete',
+      shell: 'pwsh'
+    });
+    const expected = fs.readFileSync(require.resolve(`../lib/templates/completion.ps1`), 'utf8')
+      .replace(/\{pkgname\}/g, 'foo')
+      .replace(/{completer}/g, 'foo-complete')
+      .replace(/\r?\n/g, '\n');
+    assert.equal(received, expected);
+  });
 });
