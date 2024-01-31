@@ -29,11 +29,13 @@ describe('installer', () => {
   it('install rejects on missing options', async () => {
     await assert.rejects(async () => install(), /options.name is required/);
     await assert.rejects(
+      // @ts-ignore
       async () => install({ name: 'foo ' }),
       /options.completer is required/
     );
 
     await assert.rejects(
+      // @ts-ignore
       async () => install({ name: 'foo ', completer: 'foo-complete' }),
       /options.location is required/
     );
@@ -46,6 +48,7 @@ describe('installer', () => {
       'Uninstall should throw the expected message when name is missing'
     );
     await assert.rejects(
+      // @ts-ignore
       async () => uninstall({ name: 'foo' }),
       /Unable to uninstall if options.shell is missing/,
       'Uninstall should throw the expected message when shell is missing'
