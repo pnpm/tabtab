@@ -51,4 +51,4 @@ jobs:
     - name: pnpm install
       run: pnpm install
     - name: type check
-      run: tsc --noEmit
+      run: pnpm run typecheck
