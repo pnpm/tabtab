@@ -8,11 +8,11 @@ describe('tabtab.log', () => {
     }, /^Error: log: Invalid arguments, must be an array$/);
   });
 
-  const logTestHelper = items => {
+  const logTestHelper = (items, shell) => {
     const logs = [];
     const { log } = console;
     console.log = data => logs.push(data);
-    tabtab.log(items);
+    tabtab.log(items, shell);
     console.log = log;
     return logs;
   };
@@ -20,7 +20,7 @@ describe('tabtab.log', () => {
   it('tabtab.log logs item to the console', () => {
     assert.equal(typeof tabtab.log, 'function');
 
-    const logs = logTestHelper(['--foo', '--bar']);
+    const logs = logTestHelper(['--foo', '--bar'], 'bash');
 
     assert.equal(logs.length, 2);
     assert.deepStrictEqual(logs, ['--foo', '--bar']);
@@ -29,22 +29,27 @@ describe('tabtab.log', () => {
   it('tabtab.log accepts { name, description }', () => {
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo options' },
-      { name: '--bar', description: 'Bar option' }
-    ]);
+      { name: '--bar', description: 'Bar options' }
+    ], 'zsh');
 
-    assert.equal(logs.length, 2);
-    assert.deepStrictEqual(logs, ['--foo', '--bar']);
+    assert.deepStrictEqual(logs, [
+      '--foo:Foo options',
+      '--bar:Bar options',
+    ]);
   });
 
   it('tabtab.log normalize String and Objects', () => {
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo options' },
-      { name: '--bar', description: 'Bar option' },
+      { name: '--bar', description: 'Bar options' },
       'foobar'
-    ]);
+    ], 'zsh');
 
-    assert.equal(logs.length, 3);
-    assert.deepStrictEqual(logs, ['--foo', '--bar', 'foobar']);
+    assert.deepStrictEqual(logs, [
+      '--foo:Foo options',
+      '--bar:Bar options',
+      'foobar',
+    ]);
   });
 
   it('tabtab.log normalize String and Objects, with description stripped out on Bash', () => {
