@@ -3,12 +3,15 @@
   "name": "@pnpm/tabtab",
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "main": "lib/index.js",
+  "types": "types/index.d.ts",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
     "test": "mkdir -p ~/.config/tabtab && DEBUG='tabtab*' c8 mocha --timeout 5000",
     "typecheck": "tsc -p lib -p test --noEmit",
+    "build": "tsc -p lib",
+    "prepublishOnly": "pnpm run build",
     "posttest": "npm run eslint",
     "mocha": "DEBUG='tabtab*' mocha --timeout 5000",
     "coverage": "c8 report --reporter=text-lcov | coveralls",
