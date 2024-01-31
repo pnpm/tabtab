@@ -6,7 +6,8 @@ const path = require('path');
 const fs = require('fs');
 const { promisify } = require('util');
 const tabtab = require('..');
-const { COMPLETION_DIR, TABTAB_SCRIPT_NAME } = require('../lib/constants');
+const { COMPLETION_DIR } = require('../lib/constants');
+const { tabtabFileName } = require('../lib/filename');
 const { rejects, setupSuiteForInstall } = require('./utils');
 
 const readFile = promisify(fs.readFile);
@@ -26,11 +27,13 @@ describe('tabtab.install()', () => {
   });
 
   it('rejects on missing options', async () => {
+    // @ts-ignore
     await assert.rejects(async () => tabtab.install(), TypeError);
   });
 
   it('rejects on missing name options', async () => {
     await assert.rejects(
+      // @ts-ignore
       async () => tabtab.install({}),
       /options\.name is required/
     );
@@ -38,6 +41,7 @@ describe('tabtab.install()', () => {
 
   it('rejects on missing completer options', async () => {
     await assert.rejects(
+      // @ts-ignore
       async () => tabtab.install({ name: 'foo' }),
       /options\.completer is required/
     );
@@ -55,7 +59,7 @@ describe('tabtab.install()', () => {
     const bashDir = untildify(path.join(COMPLETION_DIR, 'bash'));
     await mkdir(bashDir, { recursive: true });
     // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
-    await writeFile(path.join(bashDir, `${TABTAB_SCRIPT_NAME}.bash`), '');
+    await writeFile(path.join(bashDir, tabtabFileName('bash')), '');
 
     await tabtab.install({ name: 'foo', completer: 'foo', shell: 'bash' });
 
