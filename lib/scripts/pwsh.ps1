@@ -1,4 +1,4 @@
-# powershell completion for {pkgname} -*- shell-script -*-
+###-begin-{pkgname}-completion-###
 
 Register-ArgumentCompleter -CommandName '{pkgname}' -ScriptBlock {
     param(
@@ -189,3 +189,5 @@ Register-ArgumentCompleter -CommandName '{pkgname}' -ScriptBlock {
 
     }
 }
+
+###-end-{pkgname}-completion-###
