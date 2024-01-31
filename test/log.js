@@ -29,22 +29,27 @@ describe('tabtab.log', () => {
   it('tabtab.log accepts { name, description }', () => {
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo options' },
-      { name: '--bar', description: 'Bar option' }
+      { name: '--bar', description: 'Bar options' }
     ]);
 
-    assert.equal(logs.length, 2);
-    assert.deepStrictEqual(logs, ['--foo', '--bar']);
+    assert.deepStrictEqual(logs, [
+      '--foo:Foo options',
+      '--bar:Bar options',
+    ]);
   });
 
   it('tabtab.log normalize String and Objects', () => {
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo options' },
-      { name: '--bar', description: 'Bar option' },
+      { name: '--bar', description: 'Bar options' },
       'foobar'
     ]);
 
-    assert.equal(logs.length, 3);
-    assert.deepStrictEqual(logs, ['--foo', '--bar', 'foobar']);
+    assert.deepStrictEqual(logs, [
+      '--foo:Foo options',
+      '--bar:Bar options',
+      'foobar',
+    ]);
   });
 
   it('tabtab.log normalize String and Objects, with description stripped out on Bash', () => {
