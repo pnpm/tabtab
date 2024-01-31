@@ -4,5 +4,6 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationDir": "../types",
+    "strict": true
   }
 }
