@@ -6,9 +6,11 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
-    "noEmit": true,
     "module": "Node16",
     "strictNullChecks": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "types",
     // "moduleResolution": "Node16",
     "target": "ES2022",
   }
