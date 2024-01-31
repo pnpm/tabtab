@@ -4,6 +4,7 @@ const tabtab = require('..');
 describe('tabtab.log', () => {
   it('tabtab.log throws an Error in case args is not an Array', () => {
     assert.throws(() => {
+      // @ts-ignore
       tabtab.log('foo', 'bar');
     }, /^Error: log: Invalid arguments, must be an array$/);
   });

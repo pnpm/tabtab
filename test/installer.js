@@ -9,7 +9,8 @@ const {
   writeToShellConfig,
   writeToCompletionScript
 } = require('../lib/installer');
-const { COMPLETION_DIR, TABTAB_SCRIPT_NAME } = require('../lib/constants');
+const { COMPLETION_DIR } = require('../lib/constants');
+const { tabtabFileName } = require('../lib/filename');
 const { rejects, setupSuiteForInstall } = require('./utils');
 
 // For node 7 / 8
@@ -63,7 +64,7 @@ describe('installer', () => {
       const bashDir = untildify(path.join(COMPLETION_DIR, 'bash'));
       await mkdir(bashDir, { recursive: true });
       // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
-      await writeFile(path.join(bashDir, `${TABTAB_SCRIPT_NAME}.bash`), '');
+      await writeFile(path.join(bashDir, tabtabFileName('bash')), '');
     });
 
     it('installs the necessary line into ~/.bashrc', () =>

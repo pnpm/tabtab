@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const untildify = require('untildify');
 const { promisify } = require('util');
-const { COMPLETION_DIR, TABTAB_SCRIPT_NAME } = require('../../lib/constants');
+const { COMPLETION_DIR } = require('../../lib/constants');
+const { tabtabFileName } = require('../../lib/filename');
 
 const { exists } = require('../../lib/utils');
 
@@ -12,7 +13,7 @@ const readFile = promisify(fs.readFile);
 /**
  * Returns both { exists, content }
  *
- * @param {filename} filename - The file to check and read
+ * @param {String} filename - The file to check and read
  */
 const readIfExists = async filename => {
   /* eslint-disable no-return-await */
@@ -29,7 +30,7 @@ const readIfExists = async filename => {
 const afterWrites = (prevBashrc, prevScript) => async () => {
   const bashrc = untildify('~/.bashrc');
   const tabtabScript = untildify(
-    path.join(COMPLETION_DIR, `${TABTAB_SCRIPT_NAME}.bash`)
+    path.join(COMPLETION_DIR, tabtabFileName('bash'))
   );
 
   await writeFile(bashrc, prevBashrc);
@@ -46,7 +47,7 @@ const afterWrites = (prevBashrc, prevScript) => async () => {
 const setupSuiteForInstall = async (shouldUseAfter = false) => {
   const files = {};
   const hook = shouldUseAfter ? after : afterEach;
-  const tabtabScript = path.join(COMPLETION_DIR, `${TABTAB_SCRIPT_NAME}.bash`);
+  const tabtabScript = path.join(COMPLETION_DIR, tabtabFileName('bash'));
 
   before(async () => {
     const { exists: bashrcExists, content: bashrcContent } = await readIfExists(
