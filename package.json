@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "mkdir -p ~/.config/tabtab && DEBUG='tabtab*' c8 mocha --timeout 5000",
+    "typecheck": "tsc --noEmit",
     "posttest": "npm run eslint",
     "mocha": "DEBUG='tabtab*' mocha --timeout 5000",
     "coverage": "c8 report --reporter=text-lcov | coveralls",
@@ -34,7 +35,10 @@
     "npm-watch": "^0.4.0",
     "remark-cli": "^5.0.0",
     "remark-toc": "^5.1.1",
-    "serve": "^10.1.2"
+    "serve": "^10.1.2",
+    "typescript": "^5.3.3",
+    "@types/mocha": "^7.0.0",
+    "@types/node": "^20.11.13"
   },
   "license": "MIT",
   "keywords": [
