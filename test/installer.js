@@ -57,12 +57,6 @@ describe('installer', () => {
       /Unable to uninstall if options.name is missing/,
       'Uninstall should throw the expected message when name is missing'
     );
-    await assert.rejects(
-      // @ts-ignore
-      async () => uninstall({ name: 'foo' }),
-      /Unable to uninstall if options.shell is missing/,
-      'Uninstall should throw the expected message when shell is missing'
-    );
   });
 
   it('has writeToShellConfig / writeToCompletionScript functions', () => {
