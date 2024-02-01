@@ -3,7 +3,7 @@ const fs = require('fs');
 const { getCompletionScript } = require('..');
 
 describe('getCompletionScript gets the right completion script for', () => {
-  for (const shell of ['bash', 'fish', 'zsh']) {
+  for (const shell of /** @type {const} */ (['bash', 'fish', 'zsh'])) {
     it(shell, async () => {
       const received = await getCompletionScript({
         name: 'foo',
