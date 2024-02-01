@@ -32,7 +32,7 @@ const completion = env => {
     'bar',
     'install-completion',
     'uninstall-completion',
-    'completion',
+    'completion-server',
     'someCommand:someCommand is a some kind of command with a description',
     {
       name: 'someOtherCommand:hey',
@@ -98,7 +98,7 @@ const init = async () => {
     return;
   }
 
-  if (cmd === 'completion') {
+  if (cmd === 'completion-server') {
     const env = tabtab.parseEnv(process.env);
     return completion(env);
   }
