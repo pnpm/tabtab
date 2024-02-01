@@ -108,7 +108,8 @@ const completion = env => {
     'foo',
     'bar',
     'install-completion',
-    'completion',
+    'generate-completion',
+    'completion-server',
     'someCommand:someCommand is some kind of command with a description',
     {
       name: 'someOtherCommand:hey',
@@ -148,9 +149,23 @@ const run = async () => {
     return;
   }
 
-  // The completion command is added automatically by tabtab when the program
+  /// Here we print the code for bash completion to stdout.
+  if (cmd === 'generate-completion') {
+    const completion = await tabtab
+      .getCompletionScript({
+        name: 'tabtab-test',
+        completer: 'tabtab-test',
+        shell: 'bash',
+      })
+      .catch(err => console.error('GENERATE ERROR', err));
+    console.log(completion);
+
+    return;
+  }
+
+  // The `completion-server` command is added automatically by tabtab when the program
   // is completed.
-  if (cmd === 'completion') {
+  if (cmd === 'completion-server') {
     const env = tabtab.parseEnv(process.env);
     return completion(env);
   }
