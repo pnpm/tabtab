@@ -30,9 +30,10 @@ const completion = env => {
     '--loglevel',
     'foo',
     'bar',
+    'generate-completion',
     'install-completion',
     'uninstall-completion',
-    'completion',
+    'completion-server',
     'someCommand:someCommand is a some kind of command with a description',
     {
       name: 'someOtherCommand:hey',
@@ -73,6 +74,21 @@ const init = async () => {
     return console.log('is this just fantasy ?');
   }
 
+  if (cmd === 'generate-completion') {
+    const shell = args[1];
+    if (!shell) {
+      console.error('shell argument is required');
+      return;
+    }
+    const completion = await tabtab.getCompletionScript({
+      name: 'tabtab-test',
+      completer: 'tabtab-test',
+      shell,
+    });
+    console.log(completion);
+    return;
+  }
+
   if (cmd === 'install-completion') {
     // Here we install for the program `tabtab-test` (this file), with
     // completer being the same program. Sometimes, you want to complete
@@ -98,7 +114,7 @@ const init = async () => {
     return;
   }
 
-  if (cmd === 'completion') {
+  if (cmd === 'completion-server') {
     const env = tabtab.parseEnv(process.env);
     return completion(env);
   }
