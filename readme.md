@@ -16,31 +16,6 @@ node's land.
 -   Windows is not supported
 -   Cache has been removed
 
-## Table of Contents
-
--   [Goal of this 3.0.0 version](#goal-of-this-300-version)
-
--   [Installation](#installation)
-
--   [Usage](#usage)
-
-    -   [1. Install completion](#1-install-completion)
-    -   [2. Log completion](#2-log-completion)
-    -   [3. Parsing env](#3-parsing-env)
-
--   [Completion mechanism](#completion-mechanism)
-
-    -   [Completion install](#completion-install)
-    -   [Completion uninstall](#completion-uninstall)
-
--   [Debugging](#debugging)
-
--   [API Documentation](#api-documentation)
-
--   [Changelog](#changelog)
-
--   [Credits](#credits)
-
 ## Goal of this 3.0.0 version
 
 Simplify everything, major overhaul, rewrite from scratch.
