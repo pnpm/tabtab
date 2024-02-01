@@ -30,6 +30,7 @@ const completion = env => {
     '--loglevel',
     'foo',
     'bar',
+    'generate-completion',
     'install-completion',
     'uninstall-completion',
     'completion-server',
@@ -71,6 +72,21 @@ const init = async () => {
 
   if (cmd === 'anotherOne') {
     return console.log('is this just fantasy ?');
+  }
+
+  if (cmd === 'generate-completion') {
+    const shell = args[1];
+    if (!shell) {
+      console.error('shell argument is required');
+      return;
+    }
+    const completion = await tabtab.getCompletionScript({
+      name: 'tabtab-test',
+      completer: 'tabtab-test',
+      shell,
+    });
+    console.log(completion);
+    return;
   }
 
   if (cmd === 'install-completion') {
