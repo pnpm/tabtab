@@ -8,7 +8,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "mkdir -p ~/.config/tabtab && c8 mocha --timeout 5000",
+    "test": "c8 mocha --timeout 5000",
     "typecheck": "pnpm run build && tsc -p test --noEmit",
     "build": "tsc -p lib",
     "prepublishOnly": "pnpm run build",
