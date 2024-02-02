@@ -60,6 +60,8 @@ const opts = require('minimist')(process.argv.slice(2), {
 
 const args = opts._;
 const completion = env => {
+  const shell = tabtab.getShellFromEnv(env);
+
   if (!env.complete) return;
 
   // Write your completions there
@@ -91,7 +93,7 @@ const completion = env => {
       description: 'You must add a description for items with ":" in them'
     },
     'anotherOne'
-  ]);
+  ], shell);
 };
 
 const run = async () => {
