@@ -68,7 +68,7 @@
     "commitLimit": false,
     "ignoreCommitPattern": "changelog|readme|^test"
   },
-  "version": "0.4.0",
+  "version": "0.4.1",
   "pnpm": {
     "patchedDependencies": {
       "untildify@4.0.0": "patches/untildify@4.0.0.patch"
