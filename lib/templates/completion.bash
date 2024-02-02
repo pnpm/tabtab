@@ -13,6 +13,7 @@ if type complete &>/dev/null; then
     IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
                            COMP_LINE="$COMP_LINE" \
                            COMP_POINT="$COMP_POINT" \
+                           SHELL=bash \
                            {completer} completion-server -- "${words[@]}" \
                            2>/dev/null)) || return $?
     IFS="$si"
