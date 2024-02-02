@@ -10,18 +10,20 @@ const tabtab = require('../..');
 const args = opts._;
 
 const completion = env => {
+  const shell = tabtab.getShellFromEnv(env);
+
   if (!env.complete) return;
 
   if (env.prev === 'someCommand') {
-    return tabtab.log(['is', 'this', 'the', 'real', 'life']);
+    return tabtab.log(['is', 'this', 'the', 'real', 'life'], shell);
   }
 
   if (env.prev === 'anotherOne') {
-    return tabtab.log(['is', 'this', 'just', 'fantasy']);
+    return tabtab.log(['is', 'this', 'just', 'fantasy'], shell);
   }
 
   if (env.prev === '--loglevel') {
-    return tabtab.log(['error', 'warn', 'info', 'notice', 'verbose']);
+    return tabtab.log(['error', 'warn', 'info', 'notice', 'verbose'], shell);
   }
 
   return tabtab.log([
