@@ -54,29 +54,24 @@ describe('tabtab.log', () => {
   });
 
   it('tabtab.log normalize String and Objects, with description stripped out on Bash', () => {
-    const shell = process.env.SHELL;
-    process.env.SHELL = '/bin/bash';
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo options' },
       { name: '--bar', description: 'Bar option' },
       'foobar',
       'barfoo:barfoo is not foobar'
-    ]);
+    ], 'bash');
 
     assert.equal(logs.length, 4);
     assert.deepStrictEqual(logs, ['--foo', '--bar', 'foobar', 'barfoo']);
-    process.env.SHELL = shell;
   });
 
   it('tabtab.log with description NOT stripped out on Zsh', () => {
-    const shell = process.env.SHELL;
-    process.env.SHELL = '/usr/bin/zsh';
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo option' },
       { name: '--bar', description: 'Bar option' },
       'foobar',
       'barfoo:barfoo is not foobar'
-    ]);
+    ], 'zsh');
 
     assert.equal(logs.length, 4);
     assert.deepStrictEqual(logs, [
@@ -85,18 +80,15 @@ describe('tabtab.log', () => {
       'foobar',
       'barfoo:barfoo is not foobar'
     ]);
-    process.env.SHELL = shell;
   });
 
   it('tabtab.log with description NOT stripped out on fish', () => {
-    const shell = process.env.SHELL;
-    process.env.SHELL = '/usr/bin/fish';
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo option' },
       { name: '--bar', description: 'Bar option' },
       'foobar',
       'barfoo:barfoo is not foobar'
-    ]);
+    ], 'fish');
 
     assert.equal(logs.length, 4);
     assert.deepStrictEqual(logs, [
@@ -105,18 +97,15 @@ describe('tabtab.log', () => {
       'foobar',
       'barfoo\tbarfoo is not foobar'
     ]);
-    process.env.SHELL = shell;
   });
 
   it('tabtab.log could use {name, description} for completions with ":" in them', () => {
-    const shell = process.env.SHELL;
-    process.env.SHELL = '/usr/bin/zsh';
     const logs = logTestHelper([
       { name: '--foo:bar', description: 'Foo option' },
       { name: '--bar:foo', description: 'Bar option' },
       'foobar',
       'barfoo:barfoo is not foobar'
-    ]);
+    ], 'zsh');
 
     assert.equal(logs.length, 4);
     assert.deepStrictEqual(logs, [
@@ -125,18 +114,15 @@ describe('tabtab.log', () => {
       'foobar',
       'barfoo:barfoo is not foobar'
     ]);
-    process.env.SHELL = shell;
   });
 
   it('tabtab.log should escape ":" when name is given as an object without description', () => {
-    const shell = process.env.SHELL;
-    process.env.SHELL = '/usr/bin/zsh';
     const logs = logTestHelper([
       'foo:bar',
       { name: 'foo:bar' },
       { name: 'foo:bar', description: 'A command' },
       { name: 'foo:bar', description: 'The foo:bar command' }
-    ]);
+    ], 'zsh');
 
     assert.deepStrictEqual(logs, [
       'foo:bar',
@@ -144,6 +130,5 @@ describe('tabtab.log', () => {
       'foo\\:bar:A command',
       'foo\\:bar:The foo\\:bar command'
     ]);
-    process.env.SHELL = shell;
   });
 });

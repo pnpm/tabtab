@@ -50,7 +50,7 @@ describe('tabtab.install()', () => {
   it('rejects on unknown shell target', async () => {
     await assert.rejects(
       async () =>
-        tabtab.install({ name: 'foo', completer: 'foo', shell: 'unknown' }),
+        tabtab.install({ name: 'foo', completer: 'foo', shell: /** @type {any} */ ('unknown') }),
       /Couldn't find shell location for unknown/
     );
   });
