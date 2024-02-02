@@ -33,7 +33,7 @@ jobs:
     - name: pnpm install
       run: pnpm install
     - name: run tests
-      run: SHELL=/bin/bash pnpm test
+      run: pnpm test
 
   typecheck:
     name: Type Check
