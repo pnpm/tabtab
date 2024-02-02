@@ -87,7 +87,7 @@ describe('installer', () => {
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
             filecontent.match(
-              `. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash')}`
+              `. ${path.join(COMPLETION_DIR, 'bash/__tabtab.bash').replaceAll('\\', '/')}`
             )
           );
         })
@@ -100,7 +100,7 @@ describe('installer', () => {
         .then(filecontent => {
           assert.ok(/tabtab source for foo/.test(filecontent));
           assert.ok(
-            filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/foo.bash')}`)
+            filecontent.match(`. ${path.join(COMPLETION_DIR, 'bash/foo.bash').replaceAll('\\', '/')}`)
           );
         }));
 
