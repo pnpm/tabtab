@@ -60,20 +60,22 @@ const opts = require('minimist')(process.argv.slice(2), {
 
 const args = opts._;
 const completion = env => {
+  const shell = tabtab.getShellFromEnv(env);
+
   if (!env.complete) return;
 
   // Write your completions there
 
   if (env.prev === 'foo') {
-    return tabtab.logCompletion(['is', 'this', 'the', 'real', 'life']);
+    return tabtab.logCompletion(['is', 'this', 'the', 'real', 'life'], shell, console.log);
   }
 
   if (env.prev === 'bar') {
-    return tabtab.logCompletion(['is', 'this', 'just', 'fantasy']);
+    return tabtab.logCompletion(['is', 'this', 'just', 'fantasy'], shell, console.log);
   }
 
   if (env.prev === '--loglevel') {
-    return tabtab.logCompletion(['error', 'warn', 'info', 'notice', 'verbose']);
+    return tabtab.logCompletion(['error', 'warn', 'info', 'notice', 'verbose'], shell, console.log);
   }
 
   return tabtab.logCompletion([
@@ -91,7 +93,7 @@ const completion = env => {
       description: 'You must add a description for items with ":" in them'
     },
     'anotherOne'
-  ]);
+  ], shell, console.log);
 };
 
 const run = async () => {
