@@ -60,20 +60,22 @@ const opts = require('minimist')(process.argv.slice(2), {
 
 const args = opts._;
 const completion = env => {
+  const shell = tabtab.getShellFromEnv(env);
+
   if (!env.complete) return;
 
   // Write your completions there
 
   if (env.prev === 'foo') {
-    return tabtab.log(['is', 'this', 'the', 'real', 'life']);
+    return tabtab.log(['is', 'this', 'the', 'real', 'life'], shell, console.log);
   }
 
   if (env.prev === 'bar') {
-    return tabtab.log(['is', 'this', 'just', 'fantasy']);
+    return tabtab.log(['is', 'this', 'just', 'fantasy'], shell, console.log);
   }
 
   if (env.prev === '--loglevel') {
-    return tabtab.log(['error', 'warn', 'info', 'notice', 'verbose']);
+    return tabtab.log(['error', 'warn', 'info', 'notice', 'verbose'], shell, console.log);
   }
 
   return tabtab.log([
@@ -91,7 +93,7 @@ const completion = env => {
       description: 'You must add a description for items with ":" in them'
     },
     'anotherOne'
-  ]);
+  ], shell, console.log);
 };
 
 const run = async () => {
@@ -103,10 +105,16 @@ const run = async () => {
   // completer being the same program. Sometimes, you want to complete
   // another program that's where the `completer` option might come handy.
   if (cmd === 'install-completion') {
+    const shell = args[1];
+    if (!tabtab.isShellSupported(shell)) {
+      throw new Error(`${shell} is not supported`);
+    }
+
     await tabtab
       .install({
         name: 'tabtab-test',
-        completer: 'tabtab-test'
+        completer: 'tabtab-test',
+        shell,
       })
       .catch(err => console.error('INSTALL ERROR', err));
 

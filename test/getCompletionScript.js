@@ -12,9 +12,9 @@ describe('getCompletionScript gets the right completion script for', () => {
         shell
       });
       const expected = fs.readFileSync(require.resolve(`../lib/templates/completion.${COMPLETION_FILE_EXT[shell]}`), 'utf8')
-        .replace(/\{pkgname\}/g, 'foo')
-        .replace(/{completer}/g, 'foo-complete')
-        .replace(/\r?\n/g, '\n');
+        .replaceAll('{pkgname}', 'foo')
+        .replaceAll('{completer}', 'foo-complete')
+        .replaceAll(/\r?\n/g, '\n');
       assert.equal(received, expected);
     });
   }

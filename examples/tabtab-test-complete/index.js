@@ -10,18 +10,20 @@ const tabtab = require('../..');
 const args = opts._;
 
 const completion = env => {
+  const shell = tabtab.getShellFromEnv(env);
+
   if (!env.complete) return;
 
   if (env.prev === 'someCommand') {
-    return tabtab.log(['is', 'this', 'the', 'real', 'life']);
+    return tabtab.log(['is', 'this', 'the', 'real', 'life'], shell, console.log);
   }
 
   if (env.prev === 'anotherOne') {
-    return tabtab.log(['is', 'this', 'just', 'fantasy']);
+    return tabtab.log(['is', 'this', 'just', 'fantasy'], shell, console.log);
   }
 
   if (env.prev === '--loglevel') {
-    return tabtab.log(['error', 'warn', 'info', 'notice', 'verbose']);
+    return tabtab.log(['error', 'warn', 'info', 'notice', 'verbose'], shell, console.log);
   }
 
   return tabtab.log([
@@ -40,7 +42,7 @@ const completion = env => {
       description: 'You must add a description for items with ":" in them'
     },
     'anotherOne'
-  ]);
+  ], shell, console.log);
 };
 
 const init = async () => {
@@ -90,13 +92,19 @@ const init = async () => {
   }
 
   if (cmd === 'install-completion') {
+    const shell = args[1];
+    if (!tabtab.isShellSupported(shell)) {
+      throw new Error(`${shell} is not supported`);
+    }
+
     // Here we install for the program `tabtab-test` (this file), with
     // completer being the same program. Sometimes, you want to complete
     // another program that's where the `completer` option might come handy.
     await tabtab
       .install({
         name: 'tabtab-test',
-        completer: 'tabtab-test'
+        completer: 'tabtab-test',
+        shell,
       })
       .catch(err => console.error('INSTALL ERROR', err));
 

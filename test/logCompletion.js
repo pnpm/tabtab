@@ -11,10 +11,10 @@ describe('tabtab.log', () => {
 
   const logTestHelper = (items, shell) => {
     const logs = [];
-    const { log } = console;
-    console.log = data => logs.push(data);
-    tabtab.log(items, shell);
-    console.log = log;
+    const log = message => {
+      logs.push(message);
+    }
+    tabtab.log(items, shell, log);
     return logs;
   };
 
