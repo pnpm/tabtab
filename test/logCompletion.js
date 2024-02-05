@@ -1,25 +1,25 @@
 const assert = require('assert');
 const tabtab = require('..');
 
-describe('tabtab.log', () => {
-  it('tabtab.log throws an Error in case args is not an Array', () => {
+describe('tabtab.logCompletion', () => {
+  it('tabtab.logCompletion throws an Error in case args is not an Array', () => {
     assert.throws(() => {
       // @ts-ignore
-      tabtab.log('foo', 'bar');
+      tabtab.logCompletion('foo', 'bar');
     }, /^Error: log: Invalid arguments, must be an array$/);
   });
 
   const logTestHelper = (items, shell) => {
     const logs = [];
-    const { log } = console;
-    console.log = data => logs.push(data);
-    tabtab.log(items, shell);
-    console.log = log;
+    const log = message => {
+      logs.push(message);
+    }
+    tabtab.logCompletion(items, shell, log);
     return logs;
   };
 
-  it('tabtab.log logs item to the console', () => {
-    assert.equal(typeof tabtab.log, 'function');
+  it('tabtab.logCompletion logs item to the console', () => {
+    assert.equal(typeof tabtab.logCompletion, 'function');
 
     const logs = logTestHelper(['--foo', '--bar'], 'bash');
 
@@ -27,7 +27,7 @@ describe('tabtab.log', () => {
     assert.deepStrictEqual(logs, ['--foo', '--bar']);
   });
 
-  it('tabtab.log accepts { name, description }', () => {
+  it('tabtab.logCompletion accepts { name, description }', () => {
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo options' },
       { name: '--bar', description: 'Bar options' }
@@ -39,7 +39,7 @@ describe('tabtab.log', () => {
     ]);
   });
 
-  it('tabtab.log normalize String and Objects', () => {
+  it('tabtab.logCompletion normalize String and Objects', () => {
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo options' },
       { name: '--bar', description: 'Bar options' },
@@ -53,7 +53,7 @@ describe('tabtab.log', () => {
     ]);
   });
 
-  it('tabtab.log normalize String and Objects, with description stripped out on Bash', () => {
+  it('tabtab.logCompletion normalize String and Objects, with description stripped out on Bash', () => {
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo options' },
       { name: '--bar', description: 'Bar option' },
@@ -65,7 +65,7 @@ describe('tabtab.log', () => {
     assert.deepStrictEqual(logs, ['--foo', '--bar', 'foobar', 'barfoo']);
   });
 
-  it('tabtab.log with description NOT stripped out on Zsh', () => {
+  it('tabtab.logCompletion with description NOT stripped out on Zsh', () => {
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo option' },
       { name: '--bar', description: 'Bar option' },
@@ -82,7 +82,7 @@ describe('tabtab.log', () => {
     ]);
   });
 
-  it('tabtab.log with description NOT stripped out on fish', () => {
+  it('tabtab.logCompletion with description NOT stripped out on fish', () => {
     const logs = logTestHelper([
       { name: '--foo', description: 'Foo option' },
       { name: '--bar', description: 'Bar option' },
@@ -99,7 +99,7 @@ describe('tabtab.log', () => {
     ]);
   });
 
-  it('tabtab.log could use {name, description} for completions with ":" in them', () => {
+  it('tabtab.logCompletion could use {name, description} for completions with ":" in them', () => {
     const logs = logTestHelper([
       { name: '--foo:bar', description: 'Foo option' },
       { name: '--bar:foo', description: 'Bar option' },
@@ -116,7 +116,7 @@ describe('tabtab.log', () => {
     ]);
   });
 
-  it('tabtab.log should escape ":" when name is given as an object without description', () => {
+  it('tabtab.logCompletion should escape ":" when name is given as an object without description', () => {
     const logs = logTestHelper([
       'foo:bar',
       { name: 'foo:bar' },

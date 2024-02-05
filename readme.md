@@ -65,18 +65,18 @@ const completion = env => {
   // Write your completions there
 
   if (env.prev === 'foo') {
-    return tabtab.log(['is', 'this', 'the', 'real', 'life']);
+    return tabtab.logCompletion(['is', 'this', 'the', 'real', 'life']);
   }
 
   if (env.prev === 'bar') {
-    return tabtab.log(['is', 'this', 'just', 'fantasy']);
+    return tabtab.logCompletion(['is', 'this', 'just', 'fantasy']);
   }
 
   if (env.prev === '--loglevel') {
-    return tabtab.log(['error', 'warn', 'info', 'notice', 'verbose']);
+    return tabtab.logCompletion(['error', 'warn', 'info', 'notice', 'verbose']);
   }
 
-  return tabtab.log([
+  return tabtab.logCompletion([
     '--help',
     '--version',
     '--loglevel',
@@ -189,10 +189,10 @@ Only one line will be added, even if it is called multiple times.
 Once the completion is enabled and active, you can write completions for the
 program (here, in this example `tabtab-test`). Briefly, adding completions is
 as simple as logging output to `stdout`, with a few particularities (namely on
-Bash, and for descriptions), but this is taken care of by `tabtab.log()`.
+Bash, and for descriptions), but this is taken care of by `tabtab.logCompletion()`.
 
 ```js
-tabtab.log([
+tabtab.logCompletion([
   '--help',
   '--version',
   'command'
@@ -206,7 +206,7 @@ to add descriptions for each completion item, for the shells that support them
 (like Zsh or Fish). Or use the simpler `name:description` form.
 
 ```js
-tabtab.log([
+tabtab.logCompletion([
   { name: 'command', description: 'Description for command' },
   'command-two:Description for command-two'
 ]);
@@ -215,7 +215,7 @@ tabtab.log([
 The `{ name, description }` approach is preferable in case you have completion
 items with `:` in them.
 
-Note that you can call `tabtab.log()` multiple times if you prefer to do so, it
+Note that you can call `tabtab.logCompletion()` multiple times if you prefer to do so, it
 simply logs to the console in sequence.
 
 #### Filesystem completion
@@ -262,7 +262,7 @@ Usually, you'll want to check against `env.last` or `env.prev`.
 
 ```js
 if (env.prev === '--loglevel') {
-  tabtab.log(['error', 'warn', 'info', 'notice', 'verbose']);
+  tabtab.logCompletion(['error', 'warn', 'info', 'notice', 'verbose']);
 }
 ```
 
@@ -376,8 +376,8 @@ When testing a completion, it can be useful to see those logs, but writing to
 You can use the `TABTAB_DEBUG` environment variable to specify a file to log to
 instead.
 
-    export TABTAB_DEBUG="/tmp/tabtab.log"
-    tail -f /tmp/tabtab.log
+    export TABTAB_DEBUG="/tmp/tabtab.logCompletion"
+    tail -f /tmp/tabtab.logCompletion
 
     # in another shell
     tabtab-test <tab>
