@@ -105,10 +105,16 @@ const run = async () => {
   // completer being the same program. Sometimes, you want to complete
   // another program that's where the `completer` option might come handy.
   if (cmd === 'install-completion') {
+    const shell = args[1];
+    if (!tabtab.isShellSupported(shell)) {
+      throw new Error(`${shell} is not supported`);
+    }
+
     await tabtab
       .install({
         name: 'tabtab-test',
-        completer: 'tabtab-test'
+        completer: 'tabtab-test',
+        shell,
       })
       .catch(err => console.error('INSTALL ERROR', err));
 
