@@ -15,18 +15,18 @@ const completion = env => {
   if (!env.complete) return;
 
   if (env.prev === 'someCommand') {
-    return tabtab.logCompletion(['is', 'this', 'the', 'real', 'life'], shell, console.log);
+    return tabtab.log(['is', 'this', 'the', 'real', 'life'], shell, console.log);
   }
 
   if (env.prev === 'anotherOne') {
-    return tabtab.logCompletion(['is', 'this', 'just', 'fantasy'], shell, console.log);
+    return tabtab.log(['is', 'this', 'just', 'fantasy'], shell, console.log);
   }
 
   if (env.prev === '--loglevel') {
-    return tabtab.logCompletion(['error', 'warn', 'info', 'notice', 'verbose'], shell, console.log);
+    return tabtab.log(['error', 'warn', 'info', 'notice', 'verbose'], shell, console.log);
   }
 
-  return tabtab.logCompletion([
+  return tabtab.log([
     '--help',
     '--version',
     '--loglevel',
