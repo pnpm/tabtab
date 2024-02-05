@@ -1,7 +1,6 @@
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-const untildify = require('untildify');
 const { promisify } = require('util');
 const {
   install,

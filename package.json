@@ -59,8 +59,7 @@
   "dependencies": {
     "debug": "^4.3.1",
     "enquirer": "^2.3.6",
-    "minimist": "^1.2.5",
-    "untildify": "^4.0.0"
+    "minimist": "^1.2.5"
   },
   "auto-changelog": {
     "template": "keepachangelog",
@@ -68,10 +67,5 @@
     "commitLimit": false,
     "ignoreCommitPattern": "changelog|readme|^test"
   },
-  "version": "0.5.1",
-  "pnpm": {
-    "patchedDependencies": {
-      "untildify@4.0.0": "patches/untildify@4.0.0.patch"
-    }
-  }
+  "version": "0.5.1"
 }

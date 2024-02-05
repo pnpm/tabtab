@@ -1,3 +1,4 @@
+const os = require('os');
 const tabtab = require('../..');
 
 (async () => {
@@ -5,5 +6,6 @@ const tabtab = require('../..');
     name: 'foo',
     completer: 'foo-complete',
     shell: 'bash',
+    getHomeDir: os.homedir,
   });
 })();

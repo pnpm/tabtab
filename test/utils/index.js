@@ -14,11 +14,12 @@ const readFile = promisify(fs.readFile);
  * Returns both { exists, content }
  *
  * @param {String} filename - The file to check and read
+ * @param {() => String} getHomeDir - Function that returns the home directory, usually `os.homedir`
  */
-const readIfExists = async filename => {
+const readIfExists = async (filename, getHomeDir) => {
   /* eslint-disable no-return-await */
   const filepath = untildify(filename);
-  const fileExists = await exists(filepath);
+  const fileExists = await exists(filepath, getHomeDir);
   const content = fileExists ? await readFile(filepath, 'utf8') : '';
 
   return {

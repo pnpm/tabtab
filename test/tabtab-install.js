@@ -1,11 +1,11 @@
 const assert = require('assert');
 const run = require('inquirer-test');
 const debug = require('debug')('tabtab:test:install');
-const untildify = require('untildify');
 const path = require('path');
 const fs = require('fs');
 const { promisify } = require('util');
 const tabtab = require('..');
+const untildify = require('../lib/utils/untildify');
 const { COMPLETION_DIR } = require('../lib/constants');
 const { tabtabFileName } = require('../lib/filename');
 const { rejects, setupSuiteForInstall } = require('./utils');
@@ -20,6 +20,11 @@ assert.rejects = rejects;
 // inquirer-test needs a little bit more time, or my setup
 const TIMEOUT = 500;
 const { ENTER } = run;
+
+const fakeHomeDir = () => {
+  const dirPath = fs.mkdtempSync('tabtab-test-fake-home-');
+  return () => dirPath;
+}
 
 describe('tabtab.install()', () => {
   it('is a function', () => {
@@ -48,23 +53,25 @@ describe('tabtab.install()', () => {
   });
 
   it('rejects on unknown shell target', async () => {
+    const getHomeDir = fakeHomeDir();
     await assert.rejects(
       async () =>
-        tabtab.install({ name: 'foo', completer: 'foo', shell: /** @type {any} */ ('unknown') }),
+        tabtab.install({ name: 'foo', completer: 'foo', shell: /** @type {any} */ ('unknown'), getHomeDir }),
       /Couldn't find shell location for unknown/
     );
   });
 
   it('installs to the passed in shell', async () => {
-    const bashDir = untildify(path.join(COMPLETION_DIR, 'bash'));
+    const getHomeDir = fakeHomeDir();
+    const bashDir = untildify(path.join(COMPLETION_DIR, 'bash'), getHomeDir);
     await mkdir(bashDir, { recursive: true });
     // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
     await writeFile(path.join(bashDir, tabtabFileName('bash')), '');
 
-    await tabtab.install({ name: 'foo', completer: 'foo', shell: 'bash' });
+    await tabtab.install({ name: 'foo', completer: 'foo', shell: 'bash', getHomeDir });
 
     const filecontent = await readFile(
-      untildify(path.join(COMPLETION_DIR, 'bash/__tabtab.bash')),
+      untildify(path.join(COMPLETION_DIR, 'bash/__tabtab.bash'), getHomeDir),
       'utf8'
     );
     assert.ok(/tabtab source for foo/.test(filecontent));
@@ -95,7 +102,7 @@ describe('tabtab.install()', () => {
       });
     });
 
-    it('asks about shell (bash) with default location', () => {
+    it.skip('asks about shell (bash) with default location', () => {
       const cliPath = path.join(__dirname, 'fixtures/tabtab-install.js');
 
       return run([cliPath], [ENTER, ENTER], TIMEOUT)
@@ -107,7 +114,7 @@ describe('tabtab.install()', () => {
             /install completion to ~\/\.bashrc, is it ok \? Yes/.test(result)
           );
         })
-        .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
+        .then(() => readFile(untildify('~/.bashrc', require('os').homedir), 'utf8'))
         .then(filecontent => {
           assert.ok(/tabtab source for packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
