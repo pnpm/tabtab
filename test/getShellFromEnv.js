@@ -1,3 +1,4 @@
+const path = require('path')
 const assert = require('assert');
 const { SUPPORTED_SHELLS, getShellFromEnv } = require('..');
 
@@ -26,4 +27,11 @@ describe('getShellFromEnv', () => {
       SUPPORTED_SHELLS,
     );
   });
+
+  it('handles absolute paths', () => {
+    assert.deepStrictEqual(
+      SUPPORTED_SHELLS.map(shell => path.resolve('bin', shell)).map(SHELL => getShellFromEnv({ SHELL })),
+      SUPPORTED_SHELLS,
+    )
+  })
 });
