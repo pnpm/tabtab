@@ -276,7 +276,7 @@ if (env.prev === '--loglevel') {
 
 ## Completion mechanism
 
-Feel free to browse the [scripts](./scripts) directory to inspect the various
+Feel free to browse the [examples](./examples) directory to inspect the various
 template files used when creating a completion with `tabtab.install()`.
 
 Here is a Bash completion snippet created by tabtab.
@@ -297,9 +297,15 @@ if type complete &>/dev/null; then
     IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
                            COMP_LINE="$COMP_LINE" \
                            COMP_POINT="$COMP_POINT" \
-                           tabtab-test completion -- "${words[@]}" \
+                           SHELL=bash \
+                           tabtab-test completion-server -- "${words[@]}" \
                            2>/dev/null)) || return $?
     IFS="$si"
+
+    if [ "$COMPREPLY" = "__tabtab_complete_files__" ]; then
+      COMPREPLY=($(compgen -f -- "$cword"))
+    fi
+
     if type __ltrim_colon_completions &>/dev/null; then
       __ltrim_colon_completions "${words[cword]}"
     fi
@@ -311,7 +317,7 @@ fi
 
 The system is quite simple (though hard to nail it down, thank you npm). A new
 Bash function is created, which is invoked whenever `tabtab-test` is tab
-completed. This function then invokes the completer `tabtab-test completion`
+completed. This function then invokes the completer `tabtab-test completion-server`
 with `COMP_CWORD`, `COMP_LINE` and `COMP_POINT` environment variables (which is
 parsed by `tabtab.parseEnv()`).
 
