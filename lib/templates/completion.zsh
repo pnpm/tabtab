@@ -1,3 +1,4 @@
+#compdef {pkgname}
 ###-begin-{pkgname}-completion-###
 if type compdef &>/dev/null; then
   _{pkgname}_completion () {
@@ -13,6 +14,14 @@ if type compdef &>/dev/null; then
       _describe 'values' reply
     fi
   }
-  compdef _{pkgname}_completion {pkgname}
+  # When called by the Zsh completion system, this will end with
+  # "loadautofunc" when initially autoloaded and "shfunc" later on, otherwise,
+  # the script was "eval"-ed so use "compdef" to register it with the
+  # completion system
+  if [[ $zsh_eval_context == *func ]]; then
+    _{pkgname}_completion "$@"
+  else
+    compdef _{pkgname}_completion {pkgname}
+  fi
 fi
 ###-end-{pkgname}-completion-###
