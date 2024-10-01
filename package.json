@@ -8,7 +8,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "c8 mocha --timeout 5000",
+    "test": "pnpm bundle-templates && c8 mocha --timeout 5000",
     "typecheck": "pnpm run build && tsc -p test --noEmit",
     "bundle-templates": "node lib/templates/bundle.js",
     "build": "pnpm run bundle-templates && tsc -p lib",
