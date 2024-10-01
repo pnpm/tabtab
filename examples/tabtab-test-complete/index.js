@@ -82,7 +82,7 @@ const init = async () => {
       console.error('shell argument is required');
       return;
     }
-    const completion = await tabtab.getCompletionScript({
+    const completion = tabtab.getCompletionScript({
       name: 'tabtab-test',
       completer: 'tabtab-test',
       shell,
