@@ -5,8 +5,8 @@ const { COMPLETION_FILE_EXT } = require('../lib/constants');
 
 describe('getCompletionScript gets the right completion script for', () => {
   for (const shell of SUPPORTED_SHELLS) {
-    it(shell, async () => {
-      const received = await getCompletionScript({
+    it(shell, () => {
+      const received = getCompletionScript({
         name: 'foo',
         completer: 'foo-complete',
         shell

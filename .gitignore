@@ -11,3 +11,4 @@ coverage/
 tabtab/
 test/tabtab.log
 /types
+/lib/templates/data.json
