@@ -12,11 +12,11 @@ jobs:
             platform: ubuntu-latest
           - node: '20'
             platform: ubuntu-latest
-          - node: '21'
+          - node: '22'
             platform: ubuntu-latest
-          - node: '20'
+          - node: '22'
             platform: windows-latest
-          - node: '20'
+          - node: '22'
             platform: macos-latest
 
     name: '${{matrix.platform}} / Node.js ${{ matrix.node }}'
